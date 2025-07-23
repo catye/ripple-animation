@@ -8,7 +8,7 @@
         body {
             margin: 0;
             padding: 0;
-            min-height: 100vh;
+            min-height: 00vh;
             background: linear-gradient(180deg, #FFF 9.31%, #ECF4FF 22.13%);
             display: flex;
             justify-content: center;
@@ -34,13 +34,12 @@
         <svg id="rippleSVG" width="1200" height="1200" style="position:absolute; left:0; top:0; pointer-events:none;">
             <defs>
                 <linearGradient id="arcGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <!-- <stop offset="-6.27%" stop-color="rgba(249, 251, 255, 0.20)" /> -->
                     <stop offset="0%" stop-color="rgba(204, 248, 255, 0.60)" />
                     <stop offset="32.42%" stop-color="rgba(174, 216, 255, 0.80)" />
                     <stop offset="73.06%" stop-color="rgba(239, 251, 255, 0.90)" />
                 </linearGradient>
             </defs>
-            <path id="rippleArc" fill="none" stroke="url(#arcGradient)" stroke-width="100" filter="blur(3px)" />
+            <path id="rippleArc" fill="none" stroke="url(#arcGradient)" stroke-width="300" filter="blur(4px)" />
         </svg>
     </div>
 
@@ -49,7 +48,7 @@
         function describeArc(cx, cy, r, startAngle, endAngle) {
             const start = polarToCartesian(cx, cy, r, endAngle);
             const end = polarToCartesian(cx, cy, r, startAngle);
-            const largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
+            const largeArcFlag = endAngle - startAngle <= 360 ? "0" : "1";
             return [
                 "M", start.x, start.y,
                 "A", r, r, 0, largeArcFlag, 0, end.x, end.y
@@ -70,7 +69,6 @@
         let strokeWidth = 100;
         let opacityStart = 0.6;
         let opacityEnd = 0;
-        let arcAngle = 120; // 1/3 circle
 
         function animateArc() {
             const arc = document.getElementById('rippleArc');
